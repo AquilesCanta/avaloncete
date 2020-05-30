@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "juego/css/principal.css" %}">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <title>Nombre de usuario</title>
+  </head>
+  <body>
+    <p>Elegi tu nombre de usuario</p>
+    <form action="/username/" method="post">{% csrf_token %}
+      <label for="name">Tu nombre: </label>
+      <input id="name" type="text" name="name" value="">
+      <input type="submit" value="OK">
+    </form>
+  </body>
+</html>
