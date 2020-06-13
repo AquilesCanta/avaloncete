@@ -2,9 +2,19 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Registracion</title>
     </head>
     <body>
-
+    {% if registered %}
+        <h1>Registrado!</h1>
+        <a href="{% url 'index' %}">Volver al Inicio</a>
+    {% else %}
+        <h1>Registrarse Aqui:</h1>
+        <form class="" method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <input type="submit" name="" value="Enviar">
+    {% endif %}
+        </form>
     </body>
 </html>
