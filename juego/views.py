@@ -16,8 +16,10 @@ def registrarse(request):
 
 		if user_form.is_valid():
 
-			user_form.save()
 
+			user = user_form.save()
+			user.set_password(user.password)
+			user.save()
 			registered = True
 
 		else:

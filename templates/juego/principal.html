@@ -1,19 +1,10 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static "juego/css/principal.css" %}">
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-    <title>Pagina Principal</title>
-  </head>
-  <body>
-    <h1>Avaloncete</h1>
+{% extends "juego/base.html" %}
+{% block body_block %}
     <ul>
         <li> <a href={% url 'registrarse' %}>Registrarse Aqui!</a></li>
         <li>Esta es la segunda modificación de Santi.</li>
         <li>Esta es la tercera y ultima modificacion.</li>
         <li>Esta es la pagina principal de avaloncete.</li>
     </ul>
-  </body>
-</html>
+ {% endblock %}
