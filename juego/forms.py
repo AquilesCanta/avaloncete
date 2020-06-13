@@ -1,4 +1,4 @@
-from juego.models import AvalonUser
+from juego.models import UsuarioAvaloncete
 from django.contrib.auth.models import User
 from django import forms
 
@@ -7,4 +7,4 @@ class UserForm(forms.ModelForm):
 
     class Meta():
         model = User
-        fields = ('username','password')
+        fields = ('username','password',)

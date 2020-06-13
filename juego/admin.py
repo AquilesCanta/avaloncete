@@ -1,6 +1,6 @@
 from django.contrib import admin
-from juego.models import AvalonUser
+from juego.models import UsuarioAvaloncete
 
 # Register your models here.
 
-admin.site.register(AvalonUser)
+admin.site.register(UsuarioAvaloncete)

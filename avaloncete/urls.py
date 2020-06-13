@@ -19,5 +19,6 @@ from juego import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",include('juego.urls'))
+    path("",include('juego.urls')),
+
 ]

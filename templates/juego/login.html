@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
+{% extends 'juego/base.html' %}
+{% block body_block %}
+<h1>Please login</h1>
+    <form class="" action="" method="post">
+        {% csrf_token %}
+        <label for="username">Usuario:</label>
+        <input type="text" name="username" placeholder="Enter Username">
 
-    </body>
-</html>
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" placeholder="Enter Password">
+        <input type="submit" name="" value="Enviar">
+    </form>
+{% endblock %}
