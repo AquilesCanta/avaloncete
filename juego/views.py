@@ -37,9 +37,9 @@ def user_login(request):
 				login(request,user)
 				return HttpResponseRedirect(reverse('index'))
 			else:
-				return HttpResponse('Esta cuenta no esta registrada')
+				return HttpResponse('Esta cuenta no esta activa')
 		else:
-			return HttpResponse('Datos Invalidos')
+			return HttpResponse('Datos invalidos')
 	else:
 		return render(request,'juego/login.html')
 
