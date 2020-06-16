@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'juego/base.html' %}
+{% block body_block %}
+    {% if registered %}
+        <h2 id="registration">Registrado!</h2>
+        <a href="{% url 'index' %}">Volver al Inicio</a>
+    {% else %}
+        <h2 id="registration">Registrarse Aqui:</h2>
+        <form class="" method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <input type="submit" name="" value="Enviar">
+    {% endif %}
+        </form>
+{% endblock %}
