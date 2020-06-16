@@ -6,3 +6,7 @@
   text-shadow: 2px 2px #f7978b;
   text-decoration: none !important;
 }
+
+.invalid_credentials {
+	color: firebrick;
+}

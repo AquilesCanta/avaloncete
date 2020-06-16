@@ -39,9 +39,12 @@ def user_login(request):
 			else:
 				return HttpResponse('Esta cuenta no esta activa')
 		else:
-			return HttpResponse('Datos invalidos')
+			return HttpResponseRedirect(reverse('login') + '?invalid_credentials=True')
 	else:
-		return render(request,'juego/login.html')
+		context = {}
+		if request.GET.get('invalid_credentials'):
+			context['invalid_credentials'] = 'Los datos no son válidos.'
+		return render(request,'juego/login.html', context=context)
 
 def user_logout(request):
 	logout(request)

@@ -1,6 +1,9 @@
 {% extends 'juego/base.html' %}
 {% block body_block %}
 <h1>Ingresar</h1>
+	{% if invalid_credentials %}
+		<p class="invalid_credentials">{{ invalid_credentials }}</p>
+	{% endif %}
     <form class="" action="" method="post">
         {% csrf_token %}
         <label for="username">Usuario:</label>
