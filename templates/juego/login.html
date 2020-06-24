@@ -4,7 +4,7 @@
 	{% if invalid_credentials %}
 		<p class="invalid_credentials">{{ invalid_credentials }}</p>
 	{% endif %}
-    <form class="" action="" method="post">
+    <form class="" action="/login/" method="post">
         {% csrf_token %}
         <label for="username">Usuario:</label>
         <input type="text" name="username" placeholder="Enter Username">

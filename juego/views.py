@@ -4,13 +4,20 @@ from juego.models import User
 from django import forms
 
 from django.contrib.auth import authenticate,login,logout
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-	return render(request,('juego/principal.html'))
+	context = {}
+	if request.GET.get('invalid_credentials'):
+		context['invalid_credentials'] = 'Los datos no son válidos.'
+	if request.user.is_authenticated:
+		template_a_mostrar = 'juego/principal.html'
+	else:
+		template_a_mostrar = 'juego/login.html'
+	return render(request, template_a_mostrar, context=context)
 
 def registrar_usuario(request):
 	registered = False
@@ -28,23 +35,20 @@ def registrar_usuario(request):
 
 
 def user_login(request):
-	if request.method == 'POST':
-		username = request.POST.get('username')
-		password = request.POST.get('password')
-		user = authenticate(username=username,password=password)
-		if user:
-			if user.is_active:
-				login(request,user)
-				return HttpResponseRedirect(reverse('index'))
-			else:
-				return HttpResponse('Esta cuenta no esta activa')
-		else:
-			return HttpResponseRedirect(reverse('login') + '?invalid_credentials=True')
-	else:
-		context = {}
-		if request.GET.get('invalid_credentials'):
-			context['invalid_credentials'] = 'Los datos no son válidos.'
-		return render(request,'juego/login.html', context=context)
+	if request.method != 'POST':
+		# Solo POST esta soportado (cuando se quieren autenticar).
+		return HttpResponseBadRequest()
+	username = request.POST.get('username')
+	password = request.POST.get('password')
+	autenticacion_satisfactoria = False
+	user = authenticate(username=username,password=password)
+	if user and user.is_active:
+		login(request,user)
+		autenticacion_satisfactoria = True
+	error = ""
+	if not autenticacion_satisfactoria:
+		error = '?invalid_credentials=True'
+	return HttpResponseRedirect(reverse('index') + error)
 
 def user_logout(request):
 	logout(request)
