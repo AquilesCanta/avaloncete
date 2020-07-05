@@ -1,0 +1,37 @@
+Escribir un programa que sirva para inventariar objetos.
+
+Acepta tres comandos:
+====================
+agregar
+quitar
+terminar -- Termina la ejecucion del programa. No toma parametros (tambien llamados argumentos).
+
+Los primeros dos comandos toman 2 parametros:
+=======================
+- nombre del elemento (no puede tener espacios en el nombre)
+- la cantidad de elementos a agregar o quitar.
+
+Entonces un comando tiene la forma:
+
+agregar bananas 10 # Le agregar 10 bananas al inventario
+quitar bananas 3 # Le quita 3 bananas al inventario
+quitar pizzas 10 # Imprime un mensaje de error que dice que no hay suficientes pizzas.
+quitar bananas 11 # Mismo que la linea de arriba.
+agregar pizzas 3 # Agrega tres pizzas al inventario
+quitar pizzas 2 # Quita 2 pizzas al inventario.
+quitar PIZZAS 1 # Quita 1 pizza al inventario (Notense las mayusculas).
+AGREGAR pizzas 1 # Agrega una pizza al inventario. De nuevo, ojo las mayusculas.
+TERMINAR # Termina el programa!
+
+Resuelvan elegantemente condiciones de error. Por ejemplo, comando no reconocido,
+que un numero este mal tipeado, que hayan parametros de mas, etc. Por ejemplo:
+
+quitor bananas 3
+# El programa imprime
+quitor es un comando no reconocido. Comandos aceptados: [agregar, quitar, terminar].
+
+agregar bananas tres
+# Tres no se puede intepretar como numero, ingrese un numero. Ejemplo: agregar aceite 4.
+
+
+
