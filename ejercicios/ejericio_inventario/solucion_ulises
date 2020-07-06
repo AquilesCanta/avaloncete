@@ -1,0 +1,54 @@
+print("""Este programa te permite agregar o quitar productos en el inventario.
+Utiliza los comandos *agregar* o *quitar*, el nombre del producto y la cantidad (numero)
+Ej: agregar banana 3
+Ej: quitar pizzas 2
+Utiliza *Terminar* para finalizar""")
+
+inventario = {}
+
+entrada = input("Ingrese el comando: ")
+entrada = entrada.lower()
+
+while entrada != "terminar":
+
+    try:
+        entrada = entrada.split()
+        comando = entrada[0]
+        producto = entrada[1]
+        try:
+            cantidad = int(entrada[2])
+        except:
+            print("la cantidad ingresada no es interpretable")
+            entrada = input("Ingrese el comando: ")
+            entrada = entrada.lower()
+            continue
+
+    except:
+        print("La linea ingresada no es correcta. Utiliza *comnado* + *producto* + *cantidad(número)*")
+        entrada = input("Ingrese el comando: ")
+        entrada = entrada.lower()
+        continue
+
+    if len(entrada) == 3 :
+        if comando == "agregar":
+            if producto not in inventario:
+                inventario[producto] = 0
+            inventario[producto] += cantidad
+
+        elif comando == "quitar":
+            if producto not in inventario:
+                print(f"{producto} no se encuentra en el inventario")
+            elif cantidad > inventario[producto]:
+                print("Hay menos productos de los que queres quitar")
+            else:
+                inventario[producto] -= cantidad
+
+        else: 
+            print("La linea ingresada no es correcta. Utiliza *comando* + *producto* + *cantidad(número)*")
+
+    entrada = input("Ingrese el comando: ")
+    
+    entrada = entrada.lower()
+    
+print(inventario)
+    
