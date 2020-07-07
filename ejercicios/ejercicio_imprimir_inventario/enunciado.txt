@@ -1,0 +1,69 @@
+Al ejercicio del inventario, le vamos a agregar el comando 'imprimir'.
+
+imprimir no toma ningun argumento e imprime el contenido en el siguiente formato.
+
+Inventario vacio:
++---------------+--------------+
+|Producto       |Cantidad      |
++---------------+--------------+
++---------------+--------------+
+
+Inventario con bananas y peras:
+
++---------------+--------------+
+|Producto       |Cantidad      |
++---------------+--------------+
+|bananas        |15            |
++---------------+--------------+
+|peras          |3             |
++---------------+--------------+
+
+Inventario con un producto con un nombre muy largo:
+
++---------------+--------------+
+|Producto       |Cantidad      |
++---------------+--------------+
+|nombre_de_pr...|1             |
++---------------+--------------+
+
+Notese:
+- La columna producto tiene 15 caracteres de ancho.
+- Si el nombre del producto tiene longitud mayor a 15, se agarran los primeros 12 caracteres y se usan los tres puntos.
+- La columna Cantidad tiene 14 caracteres de ancho. Asuman que la cantidad de productos nunca va a tener mas de 14 caracteres.
+- Cada fila tiene un caracter de alto.
+
+Copien el formato al pie de la letra!
+
+Ejemplo
+
+> Ingrese un comando:
+> agregar bananas 5
+> Ingrese un comando:
+> agregar peras tres
+> error. Ingrese un comando:
+> agregar bananas 20
+> Ingrese un comando:
+> imprimir
+>
++---------------+--------------+
+|Producto       |Cantidad      |
++---------------+--------------+
+|bananas        |25            |
++---------------+--------------+
+> Ingrese un comando:
+> quitar bananas 10
+> Ingrese un comando:
+> agregar peras 3
+> Ingrese un comando:
+> imprimir
+>
++---------------+--------------+
+|Producto       |Cantidad      |
++---------------+--------------+
+|bananas        |15            |
++---------------+--------------+
+|peras          |3             |
++---------------+--------------+
+> terminar
+-- Fin del programa --
+
