@@ -1,0 +1,15 @@
+Escribir un programa que guarde estado persistentemente.
+
+La primera vez que un usuario corre el programa, el programa imprime:
+
+> No te conozco, quien sos?
+Y le permite al usuario ingresar su nombre. Luego imprime:
+> Hola <nombre>! La proxima vez sabré tu nombre.
+
+Luego si el usuario corre el programa de nuevo:
+> Hola <nombre>! O sos otra persona? (Ingresa: "Soy yo" o "Soy otra persona"):
+Y le permite al usuario responder esa pregunta. Si el usuario ingresa:
+- "Soy otra persona", Imprimir "Como te llamas?" y permitir ingresar un nuevo nombre, con la misma idea que la parte de arriba, terminando en "Hola <nombre>! La proxima vez sabré tu nombre."
+- "Soy yo" Imprimir "Hola de nuevo, <nombre>!"
+- Otra cosa, imprimir: > No entendi! Entiendo "Soy yo" o "Soy otra persona" y permitir el ingreso de un nuevo comando.
+ 
