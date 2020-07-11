@@ -1,0 +1,16 @@
+nombre = input(str("No te conozco, quien sos?"))
+
+
+while True:
+
+prengunta_2 = input(str(f'Hola {nombre}! O sos otra persona? (Ingresa: "Soy Yo" o "Soy otra persona"'))
+
+
+if pregunta_2.lower() == 'soy otra persona':
+    nombre = input(str("No te conozco, quien sos?"))
+    print(f'Hola {nombre}!. La proxima sabre tu nombre.')
+    break
+if pregunta_2.lower() == 'soy yo':
+    print(f'Hola de nuevo, {nombre}!')
+    break
+else:
