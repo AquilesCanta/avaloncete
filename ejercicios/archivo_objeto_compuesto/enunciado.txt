@@ -1,0 +1,21 @@
+Escribir un programa igual al ejercicio archivo, excepto que además de guardar el nombre, también se acuerda de la edad.
+
+Ejemplo:
+
+- Hola quien sos?
+> Santi
+- Que edad tenes?
+> 29
+- Hola, Santi de 29. La proxima vez me acordare de vos.
+
+-- Corro el programa de nuevo --
+
+- Hola Santi de 29! Sos vos u otra persona?
+> Soy otra persona
+- Quien sos?
+> Ramiro
+- Que edad tenes?
+> 29
+- Hola, Ramiro de 29. La proxima vez me acordare de vos.
+
+Pueden usar formato texto o binario para el archivo.
