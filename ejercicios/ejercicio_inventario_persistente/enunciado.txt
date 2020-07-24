@@ -1,3 +1,5 @@
 Modificar el ejercicio "imprimir_inventario" para que el estado del inventario
 se guarde en un archivo. Es decir, si cierro el programa del inventario, la
 próxima vez que corra el programa, el estado del inventario se mantiene intacto.
+
+Sospecho que les puede ser util la funcion file.readlines().
