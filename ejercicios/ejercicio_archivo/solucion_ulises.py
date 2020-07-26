@@ -4,34 +4,30 @@ import os #para windows, no se si es igual en otros sistemas operativos
 def imprimir_saludo(nombre):
     print(f"Hola {nombre.capitalize()}! La proxima vez sabré tu nombre")
 
-def imprimir_nombre():
-    nombre = input("No te conozco, quien sos?: ")
-    return nombre
+def solicitar_nombre():
+    return input("No te conozco, quien sos?: ")
 
 def revisar_nombre():
-    reconocimiento = input("Ingresa 'soy yo' o 'soy otra persona': ")
-    return reconocimiento
+    return  input("Ingresa 'soy yo' o 'soy otra persona': ")
 
 def leer_archivo():
-    fichero_externo = open("Fichero_de_nombres.txt", "r")
-    lista_de_nombres = fichero_externo.readlines()
-    fichero_externo.close()
+    with open (PATH_ARCHIVO_NOMBRE, "r") as fichero_externo:
+        lista_de_nombres = fichero_externo.readlines()
     return lista_de_nombres
     
-path = "C:Users\\usuario\\Fichero_de_nombres.txt"
+PATH_ARCHIVO_NOMBRE = "Fichero_de_nombres.txt"
 
-if os.path.isfile(path):
+if os.path.isfile(PATH_ARCHIVO_NOMBRE):
     lista_de_nombres = leer_archivo()
 else:
-    fichero_externo = open("Fichero_de_nombres.txt", "a")
-    fichero_externo.close()
-    lista_de_nombres = leer_archivo()
+    with open (PATH_ARCHIVO_NOMBRE, "a") as fichero_externo:
+        lista_de_nombres = leer_archivo()
 
 reconocimiento = "Nada"
 
 if len(lista_de_nombres) == 0:
     with open ("Fichero_de_nombres.txt", "w") as fichero_externo:
-        nombre = imprimir_nombre()
+        nombre = solicitar_nombre()
         imprimir_saludo(nombre)
         fichero_externo.write(f"{nombre.lower()}")
 else:
@@ -43,12 +39,8 @@ else:
             print(f"Hola de nuevo, {nombre.capitalize()}")
         elif reconocimiento.lower() == "soy otra persona":
             with open ("Fichero_de_nombres.txt", "w") as fichero_externo:
-                nombre = imprimir_nombre()
+                nombre = solicitar_nombre()
                 imprimir_saludo(nombre)
                 fichero_externo.write(f"{nombre.lower()}")
         else:
             print("No entiendo! Entiendo 'soy yo' o 'soy otra persona'")
-            reconocimiento = "Nada"
-
-
-fdsag
