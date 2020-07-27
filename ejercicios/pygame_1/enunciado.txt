@@ -1,0 +1,2 @@
+Crear un programa con pygame que cree una ventana, dibuje un cuadrado verde en un fondo blanco y
+permita mover el cuadrado con las teclas.
