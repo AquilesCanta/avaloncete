@@ -16,9 +16,6 @@ class Persona():
     def imprimir_saludo(self):
         print(f"Hola {self.convertir_a_string()}! La proxima vez sabré tu nombre")
 
-
-    
-
 def solicitar_nombre():
     return input("No te conozco, quien sos?: ")
 
@@ -52,7 +49,7 @@ if len(lista_del_nombre) == 0:
 else:
     usuario = Persona(lista_del_nombre[0], lista_del_nombre[2])
     nombre_completo = usuario.convertir_a_string()
-    print(f"Hola {nombre_completo}! O sos otra persona?")
+    print(f"Hola {nombre_completo}! sos vos u sos otra persona?")
     while reconocimiento.lower() != "soy yo" and reconocimiento.lower() != "soy otra persona":
         reconocimiento = revisar_nombre() 
         if reconocimiento.lower() == "soy yo":
