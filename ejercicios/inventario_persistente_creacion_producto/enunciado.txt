@@ -1,0 +1,4 @@
+Modificar el ejercicio de archivo persistente para que además de guardar nombre de producto y cantidad, se agregue la fecha y hora del instante
+en que se agregó el producto al inventario por primera vez.
+
+Pensar qué pasa si corren esta versión modificacada del programa y usan de "archivo de inventario" un archivo de la versión vieja del programa. Prueben!
