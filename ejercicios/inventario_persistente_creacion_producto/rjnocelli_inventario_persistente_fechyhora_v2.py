@@ -14,7 +14,7 @@ class Producto():
     def __str__(self):
         return self.nombre 
     
-def calcular_fecha_y_hora():
+def crear_clave_diccionario_fecha_y_hora():
     hora_ahora = datetime.now().strftime("%H:%M")
     fecha_ahora = date.today()
     elemento = f'{fecha_ahora} {hora_ahora}'
@@ -31,12 +31,16 @@ def crear_o_actualizar_inventario(path):
     inventario = {}
 
     with open(path, 'r') as f:
-        contenido = f.read()
-        contenido = contenido.split()
+        contenido = f.readlines()
+        
+    for datos in contenido:
+        datos = datos.split()
+        nombre = datos[0]
+        cantidad = int(datos[1])
+        fecha_y_hora = f'{datos[2]} {datos[3]}'
 
-    for elemento in range(0, len(contenido), 4):
-        elemento = Producto(contenido[elemento],int(contenido[+1]),f'{contenido[+2]} {contenido[+3]}')
-        inventario[elemento.nombre] = elemento
+        nombre = Producto(nombre,cantidad,fecha_y_hora)
+        inventario[nombre.nombre] = nombre
 
     return inventario
 
@@ -68,11 +72,11 @@ def ejecutar_programa_inventario():
     while True:
         comando = input(
             "Por favor typee que accion desea realizar en el inventario: AGREGAR / QUITAR \n formato [accion-elemento-cantidad] ejemplo: agregar manzana 3\
-            \n typee IMPRIMIR para ver el inventario\n typee SALIR para terminar\n")
-        if comando.lower() == 'imprimir':
+            \n typee IMPRIMIR para ver el inventario\n typee SALIR para terminar\n").lower()
+        if comando == 'imprimir':
             os.system('clear')
             imprimir_inventario(inventario)
-        elif comando.lower() == 'salir':
+        elif comando == 'salir':
             persistir_inventario(ARCHIVO_PATH, inventario)
             print('Fin del programa.')
             break
@@ -87,30 +91,27 @@ def ejecutar_programa_inventario():
             except ValueError:
                 print('Cantidad debe ser en formato numerico positivo.')
             else:
-                accion = comando[0].lower()
-                elemento = comando[1].lower()
+                accion = comando[0]
+                elemento = comando[1]
                 cantidad = comando[2]
-                if accion.lower() == 'agregar':
+                if accion == 'agregar':
                     if elemento not in inventario:
                         os.system('clear')
-                        elemento = Producto(elemento,cantidad,calcular_fecha_y_hora())
+                        elemento = Producto(elemento,cantidad,crear_clave_diccionario_fecha_y_hora())
                         inventario[elemento.nombre] = elemento
                         print(f'NUEVO PRODUCTO {elemento.nombre} AGREGADO\n')
                     else:   
-                        inventario[elemento.nombre].cantidad += cantidad
-                        os.system('clear')
-                elif accion.lower() == 'quitar':
+                        inventario[elemento].cantidad += cantidad
+                elif accion == 'quitar':
                     if elemento not in inventario:
-                        os.system('clear')
                         print(
                             'No tienes nigun producto con ese nombre en tu inventario.')
                     else:
-                        if inventario[elemento.nombre].cantidad < cantidad:
-                            os.system('clear')
+                        if inventario[elemento].cantidad < cantidad:
                             print(
                                 'La cantidad de ese producto en tu inventario es menor a la solicitada.')
                         else:
-                            inventario[elemento.nombre].cantidad -= cantidad
+                            inventario[elemento].cantidad -= cantidad
                 else:
                     print(
                         'Has ingresado un comando incorrecto, por favor intenta de nuevo.')
