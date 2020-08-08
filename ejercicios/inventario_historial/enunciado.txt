@@ -1,0 +1,21 @@
+Modificar el ejercicio del inventario para que, en lugar de guardar la fecha de creación, guarde todas las operaciones que se han realizado
+sobre el producto. Entonces el comando imprimir ya no muestra la fecha de creación. En lugar de eso, agregamos el comando
+
+historia nombre_del_producto
+
+el cual imprime todas las modificaciones que se han hecho sobre el producto con el nombre dado. Ejemplo
+
+$ historia manzana
+Modificación: -3, Nuevo valor: 30, Fecha de modificacion: 03/03/20 20:32:15.
+Modificación: +10, Nuevo valor: 33, Fecha de modificacion: 12/02/20 16:20:00.
+Modificación: +23, Nuevo valor: 23, Fecha de modificacion: 11/02/20 20:32:15.
+Modificación: -50, Nuevo valor: 0, Fecha de modificacion: 07/02/20 11:31:05.
+Modificación: +25, Nuevo valor: 50, Fecha de modificacion: 03/02/20 11:32:15.
+Modificación: +25, Nuevo valor: 25, Fecha de modificacion: 01/01/20 09:00:30.
+
+Pistas:
+- No necesitan guardar el nuevo valor con cada operacion de modificacion. Pueden reconstruirlo si saben de cuanto fue la modificacion.
+- Piensen en agregar un objeto "ModificacionDeProducto" que guarda la cantidad en que se modificó el producto y la fecha.
+- Agregen un campo en la clase Producto que guarda la lista de modificaciones que se realizaron sobre el objeto producto.
+- El objeto producto va a tener que tener una manera de persistir y leer del archivo una lista de objetos modificacion. Los va a
+  forzar a encapsular el proceso de guardar y leer de una archivo un poco mejor.
