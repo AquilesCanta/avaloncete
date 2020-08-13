@@ -1,0 +1,27 @@
+Modificar el ejercicio "inventario_historial" para que, cuando el programa
+inicia, requiera al usuario que se autentique.
+
+Vamos a imaginar que el programa corre en un almacén de productos y que queremos
+saber cuál de los empleados en la planta introduce cada modificación. Para eso,
+antes de realizar cualquier modificación del inventario, el programa requiere
+que el usuario esté autenticado.
+
+Cuando el programa inicia, pregunta:
+
+Pantalla inicial: Desea 'AUTENTICAR' o 'CREAR' una cuenta de usuario?
+
+Pantalla de autenticación: Si el usuario ingresa 'AUTENTICAR' entonces el programa pregunta nombre de
+usuario y contraseña. Si coinciden con una cuenta existente, el usuario es
+autenticado y el programa continúa de manera normal con los comandos de
+inventario que ya existen. Si algún dato no coincide, se reporta el error y el
+programa vuelve a la pantalla inicial.
+
+Pantalla de creación: Si el usuario ingresa 'CREAR' entonces el programa permite
+el ingreso de un nombre de usuario y contraseña. Si el nombre de usuario ya está
+utilizado, reporta el error y vuelve a la pantalla inicial. Si el usuario es
+creado satisfactoriamente, el programa también vuelve a la pantalla inicial.
+
+
+Las cuentas de usuario también deben ser persistidas en un archivo, pero no
+necesariamente en el mismo archivo que el inventario.
+
