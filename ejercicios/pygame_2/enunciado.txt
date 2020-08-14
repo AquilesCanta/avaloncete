@@ -1,0 +1,16 @@
+Modificar el ejercicio pygame_1 (el del cuadrado verde sobre fondo blaco) para
+que el cuadradado, en lugar de moverse con las flechas del teclado, se mueva
+sólo a velocidad constante.
+
+La velocidad de movimiento debería ser la misma que en pygame_1. Al comienzo del
+programa, el cuadrado debe moverse hacia abajo y hacia la derecha. Cuando el
+cuadrado toca algún borde de la pantalla, el cuadrado debería rebotar de la
+misma manera que uno esperaría que una pelota rebote.
+
+Ejemplo:
+   v      ^
+	\    /
+	 \  /
+	  \/
+	--------
+
