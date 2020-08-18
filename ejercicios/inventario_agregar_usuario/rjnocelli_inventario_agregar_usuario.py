@@ -138,7 +138,6 @@ def ejecutar_programa_inventario():
     terminar_loop_autenticar = False
     terminar_loop_programa = False
 
-
 # PARTE 2: AUTENTICACION -------------------------------------
 
     while terminar_loop_autenticar is False:
