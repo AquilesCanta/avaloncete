@@ -3,12 +3,12 @@ from datetime import datetime
 import os
 
 class Producto:
-    def __init__(self, nombre, cantidad, fecha):
+    def __init__(self, nombre, cantidad):
         self.__nombre_producto = nombre
         self.__cantidad_final = int(cantidad)
-        self.__fecha_ingreso = fecha
         self.__historial_cantidad = []
         self.__historial_fecha = []
+        self.__historial_usuarios = []
     
     def imprimir_historial(self):
         lista_modificaciones = []
@@ -20,7 +20,8 @@ class Producto:
                 modificacion = self.__historial_cantidad[i] 
                 nuevo_valor = nuevo_valor + self.__historial_cantidad[i]
             fecha = self.__historial_fecha[i]
-            string = f"Modificación: {modificacion}, Nuevo valor: {nuevo_valor}, Fecha de modificación: {fecha}"
+            usuario = self.__historial_usuarios[i]
+            string = f"Modificación: {modificacion}, Nuevo valor: {nuevo_valor}, Fecha de modificación: {fecha}, Usuario: {usuario}"
             lista_modificaciones.append(string)
         print(f"$ {self.__nombre_producto}")
         for i in lista_modificaciones:
@@ -36,8 +37,12 @@ class Producto:
     def agregar_lista_fechas(self, lista):
         self.__historial_fecha = lista
 
-    def actualizar_historiales(self, fecha, cantidad):
+    def agregar_lista_usuarios(self, lista):
+        self.__historial_usuarios = lista
+
+    def actualizar_historiales(self, fecha, cantidad, usuario):
         self.__historial_fecha.append(fecha)
+        self.__historial_usuarios.append(usuario)
         self.__historial_cantidad.append(int(cantidad))
 
     def agregar_cantidad(self, cantidad):
@@ -52,11 +57,8 @@ class Producto:
     def dar_nombre(self):
         return self.__nombre_producto
 
-    def dar_fecha_ingreso(self):
-        return self.__fecha_ingreso
-
     def convertir_a_string(self):
-        return f"@|{self.__nombre_producto}|{self.__cantidad_final}|{self.__fecha_ingreso}\n"
+        return f"@|{self.__nombre_producto}|{self.__cantidad_final}\n"
 
     def string_historial_cantidad(self):
         string_final = f"#|{self.__nombre_producto}|"
@@ -76,6 +78,15 @@ class Producto:
                 string_final += self.__historial_fecha[i]
         return f"{string_final}\n"
 
+    def string_historial_usuario(self):
+        string_final = f"%|{self.__nombre_producto}|"
+        for i in range(len(self.__historial_usuarios)):
+            if i != len(self.__historial_usuarios) - 1:
+                string_final += self.__historial_usuarios[i] + "|"
+            else:
+                string_final += self.__historial_usuarios[i]
+        return f"{string_final}\n"
+
 def ingresar_comando():
     comando = input("ingrese el comando: ")
     return comando.lower().split()
@@ -84,19 +95,18 @@ def mostrar_comando_invalido():
     print ("El comando no es valido. Comandos aceptados: [agregar, quitar, terminar, imprimir, historia 'nombre del producto']")
 
 def imprimir_inventario(inventario):
-    str_inicial = "|Producto       |Cantidad      |Ingreso          |"
-    separador =   "+---------------+--------------+-----------------+"
+    str_inicial = "|Producto       |Cantidad      |"
+    separador =   "+---------------+--------------+"
     str_final = ""
     for item, valor in inventario.items():
         producto = item
         cantidad = str(valor.dar_cantidad())
         cantidad = cantidad + " " * (14 - len(cantidad))
-        fecha_ingreso = valor.dar_fecha_ingreso()
         if len(producto) > 15:
             producto = producto[0:12] + "..."
         else:
             producto = producto + " " * (15 - len(producto))
-        str_final += f"|{producto}|{cantidad}|{fecha_ingreso}|\n{separador}\n"
+        str_final += f"|{producto}|{cantidad}|\n{separador}\n"
     print(f"{separador}\n{str_inicial}\n{separador}\n{str_final}")
 
 def leer_archivo_inventario(PATH_ARCHIVO_INVENTARIO):
@@ -106,7 +116,7 @@ def leer_archivo_inventario(PATH_ARCHIVO_INVENTARIO):
         for lista in linea_productos:
             if lista[0] == "@":
                 producto = lista.split("|")
-                producto = Producto(producto[1], producto[2], producto[3])
+                producto = Producto(producto[1], producto[2])
                 nombre = producto.dar_nombre()
                 diccionario_productos[nombre] = producto
             elif lista[0] == "#":
@@ -119,8 +129,58 @@ def leer_archivo_inventario(PATH_ARCHIVO_INVENTARIO):
                 for item, valor in diccionario_productos.items():
                     if lista_fechas[1] == item:
                         valor.agregar_lista_fechas(lista_fechas[2:])
+            elif lista[0] == "%":
+                lista_usuario = lista.split("|")
+                for item, valor in diccionario_productos.items():
+                    if lista_usuario[1] == item:
+                        valor.agregar_lista_usuarios(lista_usuario[2:])
         return diccionario_productos
 
+def leer_archivo_usuarios(PATH_ARCHIVO_USUARIOS):
+    with open(PATH_ARCHIVO_USUARIOS, "r") as archivo_usuarios:
+        usuarios = archivo_usuarios.read().splitlines()
+        diccionario_usuarios = {}
+        for usuario in usuarios:
+            usuario = usuario.split("|")
+            diccionario_usuarios[usuario[0]] = usuario[1]
+    return diccionario_usuarios
+
+PATH_ARCHIVO_USUARIOS = "archivo usuarios.txt"
+
+if os.path.isfile(PATH_ARCHIVO_USUARIOS):
+    diccionario_usuarios = leer_archivo_usuarios(PATH_ARCHIVO_USUARIOS)
+else:
+    diccionario_usuarios = {}
+
+usuario_actual = None
+
+while usuario_actual == None:
+    print ("Utilice el comando 'AUTENTICAR' si ya dispone de un usuario, de lo contrario utilice el comando 'CREAR'")
+    inicio = input("Desea 'AUTENTICAR' o 'CREAR': ")
+    if inicio == "crear":
+        usuario = input("Ingrese el nombre del usuario nuevo: ")
+        for usuarios in diccionario_usuarios:
+            if usuario == usuarios:
+                print("El nombre de usuario ya existe")
+            continue
+        contrasenia = input("contraseña:")
+        diccionario_usuarios[usuario] = contrasenia
+        usuario_actual = usuario
+
+    elif inicio == "autenticar":
+        usuario = input("Usuario: ")
+        for item, valor in diccionario_usuarios.items():
+            if usuario == item:
+                contrasenia = input("Contraseña: ")
+                if contrasenia == valor:
+                    usuario_actual = usuario
+                else:
+                    print("La contraseña es incorrecta")
+            else:
+                print("El nombre de usuario es inexistente.")
+
+    else:
+        print("El comando es incorrrecto.")
 
 PATH_ARCHIVO_INVENTARIO = "archivo inventario.txt"
 
@@ -149,6 +209,7 @@ while comando[0] != "terminar":
                 valor.imprimir_historial()
                 comando = ingresar_comando()
                 continue
+
     else:
         if len(comando) != 3 :
             mostrar_comando_invalido()
@@ -169,12 +230,12 @@ while comando[0] != "terminar":
                 print("Este programa no acepta el uso de '|'")
             else:
                 if producto not in diccionario_productos:
-                    producto_nuevo = Producto(producto, cantidad, fecha)
-                    producto_nuevo.actualizar_historiales(fecha, cantidad)
+                    producto_nuevo = Producto(producto, cantidad)
+                    producto_nuevo.actualizar_historiales(fecha, cantidad, usuario_actual)
                     diccionario_productos[producto] = producto_nuevo
                 else:
                     diccionario_productos[producto].agregar_cantidad(cantidad)
-                    diccionario_productos[producto].actualizar_historiales(fecha, cantidad)
+                    diccionario_productos[producto].actualizar_historiales(fecha, cantidad, usuario_actual)
 
         elif accion == "quitar":
             if producto not in diccionario_productos:
@@ -186,7 +247,7 @@ while comando[0] != "terminar":
                     print("Hay menos productos de los que queres quitar")
                 else:
                     producto_actual.quitar_cantidad(cantidad)
-                    producto_actual.actualizar_historiales(fecha, cantidad * -1)
+                    producto_actual.actualizar_historiales(fecha, cantidad * -1, usuario_actual)
         else:
             mostrar_comando_invalido()
 
@@ -197,4 +258,7 @@ with open(PATH_ARCHIVO_INVENTARIO, "w") as archivo_productos:
         archivo_productos.write(valor.convertir_a_string())
         archivo_productos.write(valor.string_historial_cantidad())
         archivo_productos.write(valor.string_historial_fecha())
-
+        archivo_productos.write(valor.string_historial_usuario())
+with open(PATH_ARCHIVO_USUARIOS, "w") as archivo_usuarios:
+    for item, valor in diccionario_usuarios.items():
+        archivo_usuarios.write(f"{item}|{valor}\n")
