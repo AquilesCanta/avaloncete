@@ -22,7 +22,6 @@ while iniciar:
         if event.type == pygame.QUIT:
             iniciar = False
             pygame.quit()
-            key_input = pygame.key.get_pressed()
         elif event.type == KEYDOWN:
             if event.key == pygame.K_LEFT:
                 x -= 5
