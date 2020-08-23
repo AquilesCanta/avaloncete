@@ -1,0 +1,2 @@
+Agregar un comando cambiar_nombre, que se puede invocar cuando estas logueado.
+Lo que hace este comando es cambiar el nombre del usuario
